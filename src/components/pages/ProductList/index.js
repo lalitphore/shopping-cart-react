@@ -5,6 +5,8 @@ import ProductGrid from '../../atoms/ProductGrid'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as ACTIONS from '../../../store/actions/actions'
+import Apis from '../../../envirnoment_api'
+
 
 class ProductList extends Component {
     constructor(props) {
@@ -22,12 +24,12 @@ class ProductList extends Component {
     
     componentDidMount(){
         
-        fetch('http://localhost/shopping-cart/products.php').then((res)=>{ res.json().then((data)=>{ 
+        fetch(Apis.products).then((res)=>{ res.json().then((data)=>{ 
             this.setState({products:data}) 
             this.props.match.params.id ? this.getCategoryProducts(this.props.match.params.id) : this.setState({currentCategory:false})
         }) })
 
-        fetch('http://localhost/shopping-cart/product_categories.php').then((res)=>{ res.json().then((data)=>{ this.setState({productCategories:data}) }) })
+        fetch(Apis.productCategories).then((res)=>{ res.json().then((data)=>{ this.setState({productCategories:data}) }) })
 
     }
 
@@ -58,19 +60,19 @@ class ProductList extends Component {
         return(
             <div>
                 <Header activeLink="products" />
-                <section class="plp-container container">
-                    <aside class="plp-container__sidebar">
+                <section className="plp-container container">
+                    <aside className="plp-container__sidebar">
                         <nav>
-                            <ul class="plp-container__sidebar__categories" id="product-categories">
+                            <ul className="plp-container__sidebar__categories" id="product-categories">
                                 {this.state.productCategories.map((category,index)=>(
                                     <li key={index} className={this.state.currentCategory === category.urlTitle ? 'active' : ''}><Link onClick={()=>this.getCategoryProducts(category.urlTitle)} to={'/Products/'+category.urlTitle}>{category.title}</Link></li>
                                 ))}    
                             
                             </ul>
-                            <div id="mobile-accordion-icon" class="plp-container__sidebar__mobile-icon"><i class="down-arrow-icon arrow-icon"></i></div>
+                            <div id="mobile-accordion-icon" className="plp-container__sidebar__mobile-icon"><i className="down-arrow-icon arrow-icon"></i></div>
                         </nav>
                     </aside>
-                    <div class="plp-container__products" id="products-grid">
+                    <div className="plp-container__products" id="products-grid">
                     {
                         this.state.filteredProducts.length > 0 ?
                                 this.state.filteredProducts.map((product,index)=>(

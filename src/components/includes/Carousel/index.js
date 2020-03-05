@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Apis from '../../../envirnoment_api'
 
 class Carousel extends Component{
 
@@ -12,14 +13,13 @@ class Carousel extends Component{
             showInProcess:true,
             currentSlide:0,
         })
-
-        fetch('http://localhost/shopping-cart/get_home_slider.php')
+        fetch(Apis.banners)
             .then(res => {  
                 res.json().then(json => {
                     this.setState({slides:json})
                   });
             })
-            .catch(console.log)
+            .catch('Banner Api',console.log)
     }
 
     renderImage(imageUrl,index){

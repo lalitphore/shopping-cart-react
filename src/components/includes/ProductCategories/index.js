@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import Apis from '../../../envirnoment_api'
 
 class ProductCategories extends Component{
     state = {
         productCategories : []
     }
     componentDidMount(){
-        fetch('http://localhost/shopping-cart/product_categories.php')
+        fetch(Apis.productCategories)
         .then(res=>{ res.json().then((data)=>{ this.setState({productCategories:data}) }) })
     }
 
