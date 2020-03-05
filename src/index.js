@@ -19,3 +19,6 @@ ReactDOM.render(<Provider store={store}>
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+//Banners Api : https://raw.githubusercontent.com/gautam-in/shopping-cart-assignment/master/server/banners/index.get.json
